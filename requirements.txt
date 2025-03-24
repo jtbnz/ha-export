@@ -1,0 +1,7 @@
+# Core dependencies
+requests>=2.28.0
+pandas==1.5.3  # Pinned to a specific version for compatibility
+numpy==1.24.3  # Explicitly specify numpy version for compatibility with pandas
+
+# Optional dependencies for different output formats
+openpyxl>=3.0.10  # For Excel output support

@@ -1,0 +1,97 @@
+# Home Assistant Sensor Data Export - Project Intelligence
+
+This file captures important patterns, preferences, and project intelligence for the Home Assistant Sensor Data Export tool.
+
+## Implementation Patterns
+
+1. **Error Handling Approach**
+   - Use specific exception types for different error scenarios
+   - Provide clear, user-friendly error messages
+   - Exit with appropriate status codes for command-line usage
+   - Include detailed logging for troubleshooting
+   - Implement fallback mechanisms for common issues
+
+2. **API Interaction**
+   - Always include timeout parameters in API requests
+   - Use proper error handling for network and API errors
+   - Validate API responses before processing
+
+3. **Data Processing**
+   - Convert numeric values when appropriate
+   - Handle timezone information in timestamps
+   - Use pandas for data manipulation and export when available
+   - Provide fallback implementations for environments without pandas
+
+4. **File Operations**
+   - Create output directories if they don't exist
+   - Use appropriate file modes for writing
+   - Handle file operation errors gracefully
+
+5. **Dependency Management**
+   - Use try/except blocks for optional dependencies
+   - Provide fallback implementations for missing dependencies
+   - Pin specific versions of dependencies for compatibility
+
+## Code Style Preferences
+
+1. **Python Style**
+   - Follow PEP 8 guidelines
+   - Use type hints throughout
+   - Include docstrings for all functions, classes, and methods
+   - Use f-strings for string formatting
+
+2. **Project Structure**
+   - Keep sensitive configuration separate from code
+   - Use template files for user configuration
+   - Maintain comprehensive documentation
+
+3. **Command-Line Interface**
+   - Provide clear usage instructions
+   - Validate user inputs early
+   - Display progress information during execution
+
+## Known Challenges
+
+1. **Home Assistant API Limitations**
+   - Historical data availability depends on Home Assistant configuration
+   - Some sensors may not store historical data
+   - API responses may vary based on sensor type
+
+2. **Data Volume Considerations**
+   - Large time ranges may result in significant data volume
+   - Memory usage increases with data size
+   - Processing time scales with data volume
+
+3. **Authentication Complexity**
+   - Long-Lived Access Tokens require manual setup
+   - Token permissions must match the required access level
+   - Remote access may require additional configuration
+
+## Evolution of Project Decisions
+
+1. **Initial Design Decisions**
+   - Chose REST API over WebSocket API for simplicity
+   - Used pandas for data processing for built-in format support
+   - Implemented command-line interface for flexibility
+
+2. **Future Considerations**
+   - May add support for multiple sensors in a single export
+   - Consider data aggregation options for large datasets
+   - Explore visualization capabilities for quick data analysis
+
+## Tool Usage Patterns
+
+1. **Virtual Environment**
+   - Always activate the virtual environment before running the script
+   - Install dependencies via requirements.txt
+   - Keep the virtual environment isolated from system Python
+
+2. **Secrets Management**
+   - Copy secrets_template.py to secrets.py
+   - Never commit secrets.py to version control
+   - Update secrets.py with actual Home Assistant URL and token
+
+3. **Command Execution**
+   - Run the script with appropriate parameters
+   - Check for error messages in the output
+   - Verify the output file after execution
