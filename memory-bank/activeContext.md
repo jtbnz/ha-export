@@ -32,6 +32,7 @@ The initial implementation of the Home Assistant Sensor Data Export tool is comp
    - Improved error handling for timestamp parsing
    - Added fallback mechanisms for missing fields
    - Enhanced debugging output for troubleshooting
+   - Added configurable DEBUG setting to control logging verbosity
 
 ## Current Status
 

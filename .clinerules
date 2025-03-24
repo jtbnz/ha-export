@@ -10,6 +10,7 @@ This file captures important patterns, preferences, and project intelligence for
    - Exit with appropriate status codes for command-line usage
    - Include detailed logging for troubleshooting
    - Implement fallback mechanisms for common issues
+   - Use configurable debug mode to control logging verbosity
 
 2. **API Interaction**
    - Always include timeout parameters in API requests

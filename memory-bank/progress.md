@@ -14,6 +14,7 @@
 - ✅ Fallback implementation for environments without pandas
 - ✅ Enhanced logging and debugging output
 - ✅ Robust timestamp parsing with fallbacks
+- ✅ Configurable debug mode for controlling log verbosity
 
 ### Project Structure
 - ✅ Virtual environment setup

@@ -21,8 +21,11 @@ except ImportError:
     PANDAS_AVAILABLE = False
     print("Warning: pandas not available, using fallback CSV implementation.")
 
-# Debug mode (set to True to enable detailed logging)
-DEBUG = False
+# Try to import DEBUG from secrets.py, default to False if not available
+try:
+    from secrets import DEBUG
+except ImportError:
+    DEBUG = False
 
 def debug_log(message):
     """Print debug messages only when DEBUG is enabled."""
@@ -40,8 +43,10 @@ def generate_test_data(hours=24, interval_minutes=5):
     Returns:
         List of sensor readings with timestamp and state
     """
+    debug_log(f"Generating test data for {hours} hours with {interval_minutes} minute intervals")
     end_time = datetime.datetime.now()
     start_time = end_time - datetime.timedelta(hours=hours)
+    debug_log(f"Time range: {start_time} to {end_time}")
     
     # Generate data points at regular intervals
     data = []
@@ -72,12 +77,15 @@ def save_data(data, output_file):
         data: List of sensor readings
         output_file: Path to the output file
     """
+    debug_log(f"Saving {len(data)} data points to {output_file}")
+    
     if not data:
         print("No data to save.")
         return
 
     # Determine the output format based on the file extension
     file_ext = os.path.splitext(output_file)[1].lower()
+    debug_log(f"Detected file extension: {file_ext}")
     
     try:
         if PANDAS_AVAILABLE:
