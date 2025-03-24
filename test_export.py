@@ -21,6 +21,14 @@ except ImportError:
     PANDAS_AVAILABLE = False
     print("Warning: pandas not available, using fallback CSV implementation.")
 
+# Debug mode (set to True to enable detailed logging)
+DEBUG = False
+
+def debug_log(message):
+    """Print debug messages only when DEBUG is enabled."""
+    if DEBUG:
+        print(f"[DEBUG] {message}")
+
 def generate_test_data(hours=24, interval_minutes=5):
     """
     Generate test sensor data for a specified time range.

@@ -10,6 +10,7 @@ A Python utility to export sensor data from Home Assistant for analysis and visu
 - Configurable time range in hours
 - Secure storage of API credentials
 - Fallback implementation for environments without pandas
+- Debug mode for detailed logging during troubleshooting
 
 ## Prerequisites
 
@@ -41,6 +42,14 @@ A Python utility to export sensor data from Home Assistant for analysis and visu
    cp secrets_template.py secrets.py
    ```
    Edit `secrets.py` with your Home Assistant URL and API token.
+
+## Configuration
+
+The `secrets.py` file contains the following configuration options:
+
+- `HA_URL`: The URL of your Home Assistant instance
+- `HA_TOKEN`: Your Home Assistant Long-Lived Access Token
+- `DEBUG`: Set to `True` to enable detailed logging for troubleshooting, or `False` for minimal output during normal operation
 
 ## Usage
 

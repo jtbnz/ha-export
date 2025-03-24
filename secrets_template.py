@@ -14,3 +14,8 @@ HA_URL = "http://your-home-assistant-url:8123"
 # Your Home Assistant Long-Lived Access Token
 # See the documentation for instructions on how to create this token
 HA_TOKEN = "your_long_lived_access_token_here"
+
+# Debug Mode
+# Set to True to enable detailed logging for troubleshooting
+# Set to False for minimal output during normal operation
+DEBUG = False

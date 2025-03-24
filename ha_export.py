@@ -34,11 +34,16 @@ except ImportError:
 
 # Import configuration from secrets.py
 try:
-    from secrets import HA_URL, HA_TOKEN
+    from secrets import HA_URL, HA_TOKEN, DEBUG
 except ImportError:
     print("Error: secrets.py file not found or incomplete.")
     print("Please copy secrets_template.py to secrets.py and fill in your Home Assistant details.")
     sys.exit(1)
+
+def debug_log(message):
+    """Print debug messages only when DEBUG is enabled."""
+    if DEBUG:
+        print(f"[DEBUG] {message}")
 
 
 class HomeAssistantAPI:
@@ -101,9 +106,9 @@ class HomeAssistantAPI:
                 print(f"No data found for entity {entity_id} in the specified time range.")
                 return []
                 
-            # Print the first entry for debugging
+            # Log the first entry for debugging
             if data and data[0]:
-                print(f"Sample data entry: {json.dumps(data[0][0], indent=2, default=str)}")
+                debug_log(f"Sample data entry: {json.dumps(data[0][0], indent=2, default=str)}")
             
             # Extract the relevant data
             history_data = []
@@ -111,13 +116,13 @@ class HomeAssistantAPI:
                 try:
                     # Check if 'last_updated' exists in the entry
                     if 'last_updated' not in entry:
-                        print(f"Warning: 'last_updated' field missing in entry: {json.dumps(entry, indent=2, default=str)}")
+                        debug_log(f"Warning: 'last_updated' field missing in entry: {json.dumps(entry, indent=2, default=str)}")
                         # Try to use 'last_changed' as fallback if available
                         if 'last_changed' in entry:
-                            print(f"Using 'last_changed' as fallback for timestamp")
+                            debug_log(f"Using 'last_changed' as fallback for timestamp")
                             timestamp_str = entry['last_changed']
                         else:
-                            print(f"No timestamp field found, skipping entry")
+                            debug_log(f"No timestamp field found, skipping entry")
                             continue
                     else:
                         timestamp_str = entry['last_updated']
@@ -147,7 +152,7 @@ class HomeAssistantAPI:
                     })
                 except Exception as e:
                     print(f"Error processing entry: {e}")
-                    print(f"Problematic entry: {json.dumps(entry, indent=2, default=str)}")
+                    debug_log(f"Problematic entry: {json.dumps(entry, indent=2, default=str)}")
                 
             return history_data
             
@@ -156,11 +161,11 @@ class HomeAssistantAPI:
             sys.exit(1)
         except (ValueError, KeyError) as e:
             print(f"Error processing response from Home Assistant: {e}")
-            print(f"Response data: {json.dumps(data, indent=2, default=str) if 'data' in locals() else 'No data received'}")
+            debug_log(f"Response data: {json.dumps(data, indent=2, default=str) if 'data' in locals() else 'No data received'}")
             sys.exit(1)
         except Exception as e:
             print(f"Unexpected error: {e}")
-            print(f"Response data: {json.dumps(data, indent=2, default=str) if 'data' in locals() else 'No data received'}")
+            debug_log(f"Response data: {json.dumps(data, indent=2, default=str) if 'data' in locals() else 'No data received'}")
             sys.exit(1)
 
     def check_connection(self) -> bool:
