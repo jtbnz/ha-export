@@ -22,7 +22,7 @@ A Python utility to export sensor data from Home Assistant for analysis and visu
 
 1. Clone this repository:
    ```
-   git clone https://github.com/yourusername/ha-export.git
+   git clone https://github.com/jtbnz/ha-export.git
    cd ha-export
    ```
 
